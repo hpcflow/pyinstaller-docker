@@ -1,0 +1,23 @@
+
+[tool.poetry]
+name = "mypackage"
+version = "0.1.0"
+
+description = "Pyinstaller docker test"
+authors = ["aplowman <adam.plowman@manchester.ac.uk>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.7,<3.11"
+click = "^8.0.4"
+
+[tool.poetry.dev-dependencies]
+pyinstaller = "^4.9"
+
+[tool.poetry.scripts]
+mypackage = 'mypackage.main:cli'
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
