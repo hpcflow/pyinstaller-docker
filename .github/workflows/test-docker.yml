@@ -29,7 +29,7 @@ jobs:
         run: /opt/python/cp39-cp39/bin/poetry install
 
       - name: Build with pyinstaller for ${{matrix.executable_os}}
-        run: /opt/python/cp39-cp39/bin/poetry run pyinstaller mypackage/cli.py --name=mypackage --onefile
+        run: /opt/python/cp39-cp39/bin/poetry run pyinstaller mypackage/main.py --name=mypackage --onefile
 
       - uses: actions/upload-artifact@v2
         with:
