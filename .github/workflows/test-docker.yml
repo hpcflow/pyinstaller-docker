@@ -1,0 +1,12 @@
+name: test-docker
+on:
+  workflow_dispatch:
+jobs:
+  docker-job:
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/pypa/manylinux2014_x86_64
+    steps:
+      - name: test python
+        run: |
+          /opt/python/cp39-cp39/bin/python -c "print('hello world!')"
