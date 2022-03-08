@@ -18,3 +18,23 @@ jobs:
 
       - name: Configure poetry
         run: /opt/python/cp39-cp39/bin/poetry config virtualenvs.in-project true
+
+      - name: Cache the virtualenv
+        uses: actions/cache@v2
+        with:
+          path: ./.venv
+          key: venv-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: /opt/python/cp39-cp39/bin/poetry install
+
+      - name: Build with pyinstaller for ${{matrix.executable_os}}
+        run: /opt/python/cp39-cp39/bin/poetry run pyinstaller mypackage/cli.py --name=mypackage --onefile
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: mypackage
+          path: dist/mypackage
+
+      - name: Basic executable test
+        run: dist/mypackage --version
