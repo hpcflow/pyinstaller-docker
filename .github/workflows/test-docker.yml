@@ -7,14 +7,14 @@ jobs:
     container:
       image: quay.io/pypa/manylinux2014_x86_64
     steps:
-      - name: test python
+      - name: Install Python3 with development libraries
         run: |
-          /opt/python/cp39-cp39/bin/python -c "print('hello world!')"
+          yum install -y python3-devel
 
       - uses: actions/checkout@v2
 
       - name: Install poetry
-        run: /opt/python/cp39-cp39/bin/python -m pip install poetry==1.1.11
+        run: python3.9 -m pip install poetry==1.1.11
 
       - name: Configure poetry
         run: /opt/python/cp39-cp39/bin/poetry config virtualenvs.in-project true
