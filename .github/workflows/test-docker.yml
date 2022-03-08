@@ -5,27 +5,12 @@ jobs:
   docker-job:
     runs-on: ubuntu-latest
     container:
-      image: quay.io/pypa/manylinux2014_x86_64
+      image: aplowman/centos7-poetry
     steps:
-      - name: Install Python3 with development libraries
-        run: |
-          yum install -y python3-devel
-
       - uses: actions/checkout@v2
-
-      - name: Install poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | python3.9          
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Configure poetry
         run: poetry config virtualenvs.in-project true
-
-      - name: Cache the virtualenv
-        uses: actions/cache@v2
-        with:
-          path: ./.venv
-          key: venv-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
         run: poetry install
